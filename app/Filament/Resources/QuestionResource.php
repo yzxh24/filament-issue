@@ -24,6 +24,7 @@ class QuestionResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title'),
+                Forms\Components\TextInput::make('score'),
             ]);
     }
 
@@ -32,6 +33,7 @@ class QuestionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('score'),
             ])
             ->filters([
                 //

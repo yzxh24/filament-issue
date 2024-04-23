@@ -9,6 +9,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Actions\AttachAction;
 use Filament\Tables\Table;
+use Illuminate\Database\Query\Builder;
 
 class QuestionsRelationManager extends RelationManager
 {
@@ -31,7 +32,9 @@ class QuestionsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('pivot.score')
-                    ->summarize(Tables\Columns\Summarizers\Sum::make())
+                    ->summarize(Tables\Columns\Summarizers\Sum::make()
+                        ->using(fn (Builder $query): string => $query->sum('score'))
+                    )
                     ->label('Score'),
             ])
             ->filters([
